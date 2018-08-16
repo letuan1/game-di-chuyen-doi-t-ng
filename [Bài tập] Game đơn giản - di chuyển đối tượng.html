@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>[Bài tập] Game đơn giản - di chuyển đối tượng</title>
+    <title>[Thực hành] Xây dựng lớp mô phỏng sự hoạt động của đèn pin</title>
 </head>
 <body>
 
@@ -38,7 +38,7 @@
         };
 
         this.moveTop = function () {
-            this.top -= 100;
+            this.top -= 30;
             console.log('ok: ' + this.top)
         };
     }
@@ -46,19 +46,20 @@
     var hero = new Hero('200w (1).webp', 20, 30, 200);
 
     function start(){
-           if(hero.left < window.innerWidth - hero.size && window.innerHeight - hero.size > hero.top) {
+           if(hero.left < window.innerWidth - hero.size && hero.top == 20) {
                hero.moveRight();
-           }else if (window.innerWidth - hero.size > hero.top){
+           }else if (hero.left > window.innerWidth - hero.size && window.innerHeight - hero.size > hero.top){
                hero.moveDown();
-           }else if (hero.left < window.innerHeight - hero.size) {
-               hero.moveLeft()
-           }else {
+           }else if (window.innerHeight - hero.size < hero.top) {
                hero.moveLeft()
            }
-        document.getElementById('game').innerHTML = hero.getHeroElement();
-        setTimeout(start, 50)
-    }
+           if (hero.left === 0){
+               hero.moveTop()
+           }
 
+        document.getElementById('game').innerHTML = hero.getHeroElement();
+        setTimeout(start, 5)
+    }
     start();
 </script>
 </body>
